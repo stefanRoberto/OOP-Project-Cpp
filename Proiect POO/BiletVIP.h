@@ -1,7 +1,10 @@
 #pragma once
 #include "Bilet.h"
-class BiletVIP :
-    public Bilet
-{
-};
+
+// Pentru dezvoltare in faza a doua
+
+//class BiletVIP : public Bilet
+//{
+//};
+
 
