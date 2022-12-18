@@ -90,6 +90,11 @@ int Zona::getNrLocuri()
 	return nrLocuri;
 }
 
+void Zona::setNrLocuri(int n)
+{
+	this->nrLocuri = nrLocuri;
+}
+
 void Zona::setLocuri(Loc* locuri, int nrLocuri)
 {
 	if (this->locuri != nullptr)

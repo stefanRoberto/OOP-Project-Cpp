@@ -11,6 +11,7 @@ Eveniment::Eveniment()
 	ora = "N/A";
 	locatie = "N/A";
 	zone = nullptr;
+	nrZone = 0;
 }
 
 Eveniment::Eveniment(string numeEveniment, string data, string ora, string locatie, Zona* zone, int nrZone)
@@ -145,20 +146,7 @@ int Eveniment::getNrZone()
 
 void Eveniment::setNrZone(int nrZone)
 {
-	if (this->zone != nullptr)
-	{
-		delete[] this->zone;
-		this->zone = nullptr;
-	}
-
-	if (zone != nullptr && nrZone > 0)
-	{
-		this->zone = new Zona[nrZone];
-		for (int i = 0; i < nrZone; i++)
-			this->zone[i] = zone[i];
-	}
-	else
-		this->zone = nullptr;
+	this->nrZone = nrZone;
 }
 
 Eveniment::operator string()

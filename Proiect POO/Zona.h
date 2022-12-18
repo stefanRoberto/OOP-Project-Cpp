@@ -23,6 +23,7 @@ public:
     void setNumeZona(string numeZona);
     const Loc* const& getLocuri() const;
     int getNrLocuri();
+    void setNrLocuri(int n);
     void setLocuri(Loc* locuri, int nrLocuri);
 
     friend ostream& operator<<(ostream& out, Zona& z);
