@@ -23,6 +23,7 @@ public:
 	char* getEmail();
 	void setEmail(char* email);
 	void adaugaBilet(Bilet b);
+	void stergeBilet(Bilet b);
 	void afiseazaBilete();
 	friend istream& operator>>(istream& is, Client& c);
 	friend ostream& operator<<(ostream& os, const Client& c);

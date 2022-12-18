@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Bilet.h"
+#include "Zona.h"
 
 using namespace std;
 
@@ -9,12 +9,32 @@ class Eveniment
 {
 private:
 	string numeEveniment;
-	int nrMaxLocuri;
 	string data;
 	string ora;
 	string locatie;
-	Bilet* bilete; // maximul de bilete disponibile va fi egal cu nrMaxLocuri
+	Zona* zone;
+	int nrZone;
+
+public:
+	Eveniment();
+	Eveniment(string numeEveniment, string data, string ora, string locatie, Zona* zone, int nrZone);
+	Eveniment(const Eveniment& e);
+	~Eveniment();
+	Eveniment& operator=(const Eveniment& e);
+	string getNumeEveniment();
+	void setNumeEveniment(string numeEveniment);
+	string getData();
+	void setData(string data);
+	string getOra();
+	void setOra(string ora);
+	string getLocatie();
+	void setLocatie(string locatie);
+	const Zona* const& getZone() const;
+	void setZone(Zona* zone);
+	int getNrZone();
+	void setNrZone(int nrZone);
+	explicit operator string();
+	Zona& operator[](int index);
+	friend ostream& operator<<(ostream& out, Eveniment& e);
+	friend istream& operator>>(istream& in, Eveniment& e);
 };
-
-//fa o functie care sa ceara nr de randuri si locuri si sa repartizeze biletele in functie de randuri si locuri
-

@@ -6,8 +6,9 @@ using namespace std;
 
 Client::Client()
 {
-	this->nume = "N/A";
-	this->email = nullptr;
+	nume = "N/A";
+	email = nullptr;
+	bilete = nullptr;
 }
 
 Client::Client(string nume, const char* email, Bilet* bilete)
@@ -144,6 +145,20 @@ void Client::adaugaBilet(Bilet b)
 	{
 		this->bilete = new Bilet[1];
 		this->bilete[0] = b;
+	}
+}
+
+void Client::stergeBilet(Bilet b)
+{
+	if (this->bilete != nullptr)
+	{
+		Bilet* copie = new Bilet[this->bilete->getNrBilete() - 1];
+		int j = 0;
+		for (int i = 0; i < this->bilete->getNrBilete(); i++)
+			if (this->bilete[i] != b)
+				copie[j++] = this->bilete[i];
+		delete[] this->bilete;
+		this->bilete = copie;
 	}
 }
 
