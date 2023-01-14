@@ -41,6 +41,11 @@ Loc& Loc::operator=(const Loc& l)
 	return *this;
 }
 
+bool Loc::operator==(const Loc& l)
+{
+	return this->rand == l.rand && this->codificareLoc == l.codificareLoc;
+}
+
 Loc::~Loc() {}
 
 int Loc::getRand()

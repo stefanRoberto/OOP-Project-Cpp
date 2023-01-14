@@ -91,18 +91,18 @@ int main() {
 	cout << endl;
 
 	const int nrLocuri = 3;
-	Loc locuri[nrLocuri] = {
+	vector<Loc> locuri = {
 		l1,
 		l2,
 		l3
 	};
-	//Zona zona1("Zona 1", nrLocuri, locuri);
+	Zona zona1("Zona 1", locuri);
 
-	for (int i = 0; i < nrLocuri; i++)
-		cout << locuri[i] << endl;
-	cout << endl;
+	//for (int i = 0; i < nrLocuri; i++)
+	//	cout << locuri[i] << endl;
+	//cout << endl;
 
-	//cout << zona1;
+	cout << zona1;
 
 	//Zona zona2;
 

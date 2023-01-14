@@ -8,69 +8,14 @@ using namespace std;
 Zona::Zona()
 {
 	numeZona = "N/A";
-	locuri = nullptr;
 	nrLocuri = 0;
 }
 
-Zona::Zona(std::string numeZona, int nrLocuri, Loc* locuri)
-{
-	this->numeZona = numeZona;
-	this->nrLocuri = nrLocuri;
+Zona::Zona(string numeZona) : numeZona(numeZona), nrLocuri(0) {}
 
-	if (locuri != nullptr && nrLocuri > 0)
-	{
-		this->locuri = new Loc[nrLocuri];
-		for (int i = 0; i < nrLocuri; i++)
-			this->locuri[i] = locuri[i];
-	}
-	else
-		this->locuri = nullptr;
-}
+Zona::Zona(string numeZona, vector<Loc> locuri) : numeZona(numeZona), locuri(locuri), nrLocuri(locuri.size()) {}
 
-Zona::~Zona()
-{
-	if (locuri != nullptr)
-	{
-		delete[] locuri;
-		locuri = nullptr;
-	}
-}
-
-Zona::Zona(const Zona& z)
-{
-	this->numeZona = z.numeZona;
-	this->nrLocuri = z.nrLocuri;
-
-	if (z.locuri != nullptr && z.nrLocuri > 0)
-	{
-		this->locuri = new Loc[z.nrLocuri];
-		for (int i = 0; i < z.nrLocuri; i++)
-			this->locuri[i] = z.locuri[i];
-	}
-	else
-		this->locuri = nullptr;
-}
-
-Zona& Zona::operator=(const Zona& z)
-{
-	this->numeZona = z.numeZona;
-	this->nrLocuri = z.nrLocuri;
-
-	if (z.locuri != nullptr && z.nrLocuri > 0)
-	{
-		if (this->locuri != nullptr)
-			delete[] this->locuri;
-		this->locuri = new Loc[z.nrLocuri];
-		for (int i = 0; i < z.nrLocuri; i++)
-			this->locuri[i] = z.locuri[i];
-	}
-	else
-		this->locuri = nullptr;
-
-	return *this;
-}
-
-string Zona::getNumeZona()
+string Zona::getNumeZona() const
 {
 	return numeZona;
 }
@@ -80,47 +25,45 @@ void Zona::setNumeZona(string numeZona)
 	this->numeZona = numeZona;
 }
 
-const Loc* const& Zona::getLocuri() const
+vector<Loc> Zona::getLocuri() const
 {
 	return locuri;
 }
 
-int Zona::getNrLocuri()
+void Zona::setLocuri(vector<Loc> locuri)
+{
+	this->locuri = locuri;
+	this->nrLocuri = locuri.size();
+}
+
+int Zona::getNrLocuri() const
 {
 	return nrLocuri;
 }
 
-void Zona::setNrLocuri(int n)
+void Zona::appendLoc(const Loc& loc)
 {
-	this->nrLocuri = nrLocuri;
+	locuri.push_back(loc);
+	nrLocuri++;
 }
 
-void Zona::setLocuri(Loc* locuri, int nrLocuri)
+void Zona::removeLoc(const Loc& loc)
 {
-	if (this->locuri != nullptr)
+	auto it = find(locuri.begin(), locuri.end(), loc);
+	if (it != locuri.end())
 	{
-		delete[] this->locuri;
-		this->locuri = nullptr;
+		locuri.erase(it);
+		nrLocuri--;
 	}
-	this->nrLocuri = nrLocuri;
-
-	if (locuri != nullptr && nrLocuri > 0)
-	{
-		this->locuri = new Loc[nrLocuri];
-		for (int i = 0; i < nrLocuri; i++)
-			this->locuri[i] = locuri[i];
-	}
-	else
-		this->locuri = nullptr;
 }
 
-ostream& operator<<(ostream& out, Zona& z)
+ostream& operator<<(ostream& out, const Zona& z)
 {
 	out << "Nume zona: " << z.numeZona << endl;
 	out << "Numar locuri: " << z.nrLocuri << endl;
 	out << "Locuri: " << endl;
-	for (int i = 0; i < z.nrLocuri; i++)
-		out << z.locuri[i] << endl;
+	for (auto loc : z.locuri)
+		out << loc << endl;
 	return out;
 }
 
@@ -130,16 +73,12 @@ istream& operator>>(istream& in, Zona& z)
 	in >> z.numeZona;
 	cout << "Numar locuri: ";
 	in >> z.nrLocuri;
-	if (z.locuri != nullptr)
+	cout << "Locuri: " << endl;
+	for (int i = 0; i < z.nrLocuri; i++)
 	{
-		delete[] z.locuri;
-		z.locuri = nullptr;
-	}
-	if (z.nrLocuri > 0)
-	{
-		z.locuri = new Loc[z.nrLocuri];
-		for (int i = 0; i < z.nrLocuri; i++)
-			in >> z.locuri[i];
+		Loc loc;
+		in >> loc;
+		z.locuri.push_back(loc);
 	}
 	return in;
 }

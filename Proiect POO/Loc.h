@@ -20,6 +20,7 @@ public:
 	Loc(int rand, string codificareLoc, const Bilet& bilet, bool ocupat);
 	Loc(const Loc& l);
 	Loc& operator=(const Loc& l);
+	bool operator==(const Loc& l);
 	~Loc();
 	int getRand();
 	void setRand(int rand);

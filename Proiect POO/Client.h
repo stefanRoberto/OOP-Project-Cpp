@@ -28,5 +28,3 @@ public:
 	friend istream& operator>>(istream& is, Client& c);
 	friend ostream& operator<<(ostream& os, const Client& c);
 };
-
-
