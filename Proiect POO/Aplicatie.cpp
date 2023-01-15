@@ -45,6 +45,7 @@ void Aplicatie::afiseazaMeniu()
 	int optiune;
 	do
 	{
+		cout << "DISCLAIMER: Nu merg toate optiunile, se recomanda a alege optiunea 1 pentru testare, inainte de toate celelalte.\n\n> Multumesc pentru intelegere :)\n" << endl;
 		cout << "1. Adauga eveniment" << endl;
 		cout << "2. Adauga bilet" << endl;
 		cout << "3. Sterge eveniment" << endl;
@@ -54,8 +55,9 @@ void Aplicatie::afiseazaMeniu()
 		cout << "7. Cauta eveniment" << endl;
 		cout << "8. Valideaza bilet" << endl;
 		cout << "9. Iesire" << endl;
-		cout << "Optiune: ";
+		cout << "\nOptiune: ";
 		cin >> optiune;
+		cout << "\n\n";
 		switch (optiune)
 		{
 		case 1:
@@ -96,6 +98,8 @@ void Aplicatie::adaugaBilet()
 {
 	Bilet b;
 	cin >> b;
+	cout << "\n~~~AFISARE~~~\n";
+	cout << b;
 	bilete.push_back(b);
 }
 
@@ -103,13 +107,15 @@ void Aplicatie::adaugaEveniment()
 {
 	Eveniment e;
 	cin >> e;
+	cout << "\n~~~AFISARE~~~\n";
+	cout << e;
 	evenimente.push_back(e);
 }
 
 void Aplicatie::stergeBilet()
 {
 	int id;
-	cout << "Introduceti id-ul biletului pe care doriti sa il stergeti: ";
+	cout << "\nIntroduceti id-ul biletului pe care doriti sa il stergeti: ";
 	cin >> id;
 	
 	for (int i = 0; i < bilete.size(); i++)
@@ -117,17 +123,17 @@ void Aplicatie::stergeBilet()
 		if (bilete[i].getId() == id)
 		{
 			bilete.erase(bilete.begin() + i);
-			cout << "Biletul a fost sters cu succes!" << endl;
+			cout << "\nBiletul a fost sters cu succes!" << endl;
 			return;
 		}
 	}
-	cout << "Nu exista niciun bilet cu acest id!" << endl;
+	cout << "\nNu exista niciun bilet cu acest id!" << endl;
 }
 
 void Aplicatie::stergeEveniment()
 {
 	string numeEveniment;
-	cout << "Introduceti numele evenimentului pe care doriti sa il stergeti: ";
+	cout << "\nIntroduceti numele evenimentului pe care doriti sa il stergeti: ";
 	cin.ignore();
 	getline(cin, numeEveniment);
 	
@@ -136,7 +142,7 @@ void Aplicatie::stergeEveniment()
 		if (evenimente[i].getNumeEveniment() == numeEveniment)
 		{
 			evenimente.erase(evenimente.begin() + i);
-			cout << "Evenimentul a fost sters cu succes!" << endl;
+			cout << "\nEvenimentul " << numeEveniment << " a fost sters cu succes!" << endl;
 			return;
 		}
 	}
@@ -170,7 +176,7 @@ void Aplicatie::cautaEveniment()
 	{
 		if (evenimente[i].getNumeEveniment() == numeEveniment)
 		{
-			cout << "Evenimentul" << numeEveniment << "a fost gasit!" << endl;
+			cout << "Evenimentul " << numeEveniment << " a fost gasit!" << endl;
 			return;
 		}
 	}
@@ -180,16 +186,16 @@ void Aplicatie::cautaEveniment()
 void Aplicatie::valideazaBilet() 
 {
 	int id;
-	cout << "Introduceti id-ul biletului pe care doriti sa il validati: ";
+	cout << "\nIntroduceti id-ul biletului pe care doriti sa il validati: ";
 	cin >> id;
 	
 	for (int i = 0; i < bilete.size(); i++)
 	{
 		if (bilete[i].getId() == id)
 		{
-			cout << "Biletul cu id-ul " << id << " este valid!" << endl;
+			cout << "\nBiletul cu id-ul " << id << " este valid!" << endl;
 			return;
 		}
 	}
-	cout << "Nu exista niciun bilet cu acest id!" << endl;
+	cout << "\nNu exista niciun bilet cu acest id!" << endl;
 }

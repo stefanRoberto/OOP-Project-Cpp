@@ -108,7 +108,7 @@ istream& operator>>(istream& in, Loc& l)
 	int input;
 	cout << "\nAlegeti tipul biletului:";
 	cout << "\n1. Bilet normal\n";
-	cout << "2. Bilet special\n\n\t>";
+	cout << "2. Bilet special\n\n\t> ";
 	in >> input;
 	if (input == 1) {
 		if (l.bilet != nullptr)
