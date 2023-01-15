@@ -7,13 +7,13 @@ using namespace std;
 
 int Bilet::nrBilete=0;
 
-Bilet::Bilet() : id(nrBilete++)
+Bilet::Bilet() : id(++nrBilete)
 {
 	pret = 0.0;
 	categorie = "N/A";
 }
 
-Bilet::Bilet(double pret) : id(nrBilete++)
+Bilet::Bilet(double pret) : id(++nrBilete)
 {
 	if (pret > 0)
 		this->pret = pret;
@@ -23,7 +23,7 @@ Bilet::Bilet(double pret) : id(nrBilete++)
 	categorie = "N/A";
 }
 
-Bilet::Bilet(double pret, string categorie) : id(nrBilete++)
+Bilet::Bilet(double pret, string categorie) : id(++nrBilete)
 {
 	if (pret > 0)
 		this->pret = pret;
@@ -33,7 +33,7 @@ Bilet::Bilet(double pret, string categorie) : id(nrBilete++)
 	this->categorie = categorie;
 }
 
-Bilet::Bilet(const Bilet& b) : id(nrBilete++)
+Bilet::Bilet(const Bilet& b) : id(++nrBilete)
 {
 	if (b.pret > 0)
 		this->pret = b.pret;
@@ -159,7 +159,8 @@ istream& operator>>(istream& in, Bilet& b)
 		b.pret = 0.0;
 
 	cout << "Introduceti categoria biletului: ";
-	in >> b.categorie;
+	in >> ws;
+	getline(in, b.categorie);
 
 	return in;
 }

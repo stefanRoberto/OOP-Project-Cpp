@@ -102,14 +102,17 @@ istream& operator>>(istream& in, Loc& l)
 	in >> l.codificareLoc;
 
 	cout << "Este ocupat? (0 - Nu, 1 - Da): ";
+	in >> ws;
 	in >> l.ocupat;
 
 	cout << "\nBiletul: \n";
+	
 	int input;
 	cout << "\nAlegeti tipul biletului:";
 	cout << "\n1. Bilet normal\n";
-	cout << "2. Bilet special\n\n\t> ";
+	cout << "2. Bilet special\n\n> ";
 	in >> input;
+	
 	if (input == 1) {
 		if (l.bilet != nullptr)
 			in >> *l.bilet;
