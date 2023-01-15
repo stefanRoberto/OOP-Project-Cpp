@@ -37,6 +37,7 @@ Aplicatie::~Aplicatie()
 
 void Aplicatie::ruleaza()
 {
+	cout << "DISCLAIMER: Nu merg toate optiunile, se recomanda a alege optiunea 1 pentru testare, inainte de toate celelalte.\n\n> Multumesc pentru intelegere :)\n" << endl;
 	afiseazaMeniu();
 }
 
@@ -45,7 +46,6 @@ void Aplicatie::afiseazaMeniu()
 	int optiune;
 	do
 	{
-		cout << "DISCLAIMER: Nu merg toate optiunile, se recomanda a alege optiunea 1 pentru testare, inainte de toate celelalte.\n\n> Multumesc pentru intelegere :)\n" << endl;
 		cout << "1. Adauga eveniment" << endl;
 		cout << "2. Adauga bilet" << endl;
 		cout << "3. Sterge eveniment" << endl;
@@ -123,11 +123,11 @@ void Aplicatie::stergeBilet()
 		if (bilete[i].getId() == id)
 		{
 			bilete.erase(bilete.begin() + i);
-			cout << "\nBiletul a fost sters cu succes!" << endl;
+			cout << "\nBiletul a fost sters cu succes!\n" << endl;
 			return;
 		}
 	}
-	cout << "\nNu exista niciun bilet cu acest id!" << endl;
+	cout << "\nNu exista niciun bilet cu acest id!\n" << endl;
 }
 
 void Aplicatie::stergeEveniment()
@@ -142,11 +142,11 @@ void Aplicatie::stergeEveniment()
 		if (evenimente[i].getNumeEveniment() == numeEveniment)
 		{
 			evenimente.erase(evenimente.begin() + i);
-			cout << "\nEvenimentul " << numeEveniment << " a fost sters cu succes!" << endl;
+			cout << "\nEvenimentul " << numeEveniment << " a fost sters cu succes!\n" << endl;
 			return;
 		}
 	}
-	cout << "Nu exista niciun eveniment cu acest nume!" << endl;
+	cout << "Nu exista niciun eveniment cu acest nume!\n" << endl;
 }
 
 void Aplicatie::afisareBilete()
@@ -176,11 +176,11 @@ void Aplicatie::cautaEveniment()
 	{
 		if (evenimente[i].getNumeEveniment() == numeEveniment)
 		{
-			cout << "Evenimentul " << numeEveniment << " a fost gasit!" << endl;
+			cout << "Evenimentul " << numeEveniment << " a fost gasit!\n" << endl;
 			return;
 		}
 	}
-	cout << "Nu exista niciun eveniment cu acest nume!" << endl;
+	cout << "Nu exista niciun eveniment cu acest nume!\n" << endl;
 }
 
 void Aplicatie::valideazaBilet() 
@@ -193,9 +193,9 @@ void Aplicatie::valideazaBilet()
 	{
 		if (bilete[i].getId() == id)
 		{
-			cout << "\nBiletul cu id-ul " << id << " este valid!" << endl;
+			cout << "\nBiletul cu id-ul " << id << " este valid!\n" << endl;
 			return;
 		}
 	}
-	cout << "\nNu exista niciun bilet cu acest id!" << endl;
+	cout << "\nNu exista niciun bilet cu acest id!\n" << endl;
 }
