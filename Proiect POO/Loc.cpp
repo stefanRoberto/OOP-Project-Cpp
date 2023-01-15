@@ -86,7 +86,7 @@ int Loc::getIdBilet()
 bool Loc::operator!=(const Loc& l)
 {
 	if (this->bilet.getId() != l.bilet.getId())
-		return true;
+		return false;
 }
 
 const Bilet& Loc::getBilet() const
@@ -94,15 +94,16 @@ const Bilet& Loc::getBilet() const
 	return bilet;
 }
 
-
 ostream& operator<<(ostream& out, Loc& l)
 {
 	out << "Rand: " << l.getRand() << endl;
 	out << "Codificare loc: " << l.getCodificareLoc() << endl;
-	if (l.getOcupat())
+	
+	if (l.getOcupat() == true)
 		out << "Loc ocupat" << endl;
 	else
 		out << "Loc liber" << endl;
+	
 	out << l.getBilet() << endl;
 	
 	return out;
@@ -112,11 +113,14 @@ istream& operator>>(istream& in, Loc& l)
 {
 	cout << "Introduceti numarul randului: " << endl;
 	in >> l.rand;
+	
 	cout << "Introduceti codificarea locului: " << endl;
-	in >> l.codificareLoc;
+	in >> ws;
+	getline(in, l.codificareLoc);
+	
 	cout << "Specificati daca locul este ocupat (0 - nu, 1 - da): " << endl;
 	in >> l.ocupat;
-
+	
 	return in;
 }
 

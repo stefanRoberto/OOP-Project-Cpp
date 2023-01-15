@@ -15,6 +15,21 @@ Zona::Zona(string numeZona) : numeZona(numeZona), nrLocuri(0) {}
 
 Zona::Zona(string numeZona, vector<Loc> locuri) : numeZona(numeZona), locuri(locuri), nrLocuri(locuri.size()) {}
 
+Zona::~Zona() {}
+
+Zona::Zona(const Zona& z) : numeZona(z.numeZona), locuri(z.locuri), nrLocuri(z.nrLocuri) {}
+
+Zona& Zona::operator=(const Zona& z)
+{
+	if (this != &z)
+	{
+		numeZona = z.numeZona;
+		locuri = z.locuri;
+		nrLocuri = z.nrLocuri;
+	}
+	return *this;
+}
+
 string Zona::getNumeZona() const
 {
 	return numeZona;
@@ -70,9 +85,12 @@ ostream& operator<<(ostream& out, const Zona& z)
 istream& operator>>(istream& in, Zona& z)
 {
 	cout << "Nume zona: ";
-	in >> z.numeZona;
+	in.ignore();
+	getline(in, z.numeZona);
+	
 	cout << "Numar locuri: ";
 	in >> z.nrLocuri;
+	
 	cout << "Locuri: " << endl;
 	for (int i = 0; i < z.nrLocuri; i++)
 	{

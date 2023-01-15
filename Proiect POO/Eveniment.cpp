@@ -4,75 +4,32 @@
 
 using namespace std;
 
-Eveniment::Eveniment()
+Eveniment::Eveniment() : numeEveniment("N/A"), data("N/A"), ora("N/A"), locatie("N/A"), nrZone(0)
 {
-	numeEveniment = "N/A";
-	data = "N/A";
-	ora = "N/A";
-	locatie = "N/A";
-	zone = nullptr;
-	nrZone = 0;
+	zone = {};
 }
 
-Eveniment::Eveniment(string numeEveniment, string data, string ora, string locatie, Zona* zone, int nrZone)
+Eveniment::Eveniment(string numeEveniment, string data, string ora, string locatie, vector<Zona> zone) : numeEveniment(numeEveniment), data(data), ora(ora), locatie(locatie)
 {
-	this->numeEveniment = numeEveniment;
-	this->data = data;
-	this->ora = ora;
-	this->locatie = locatie;
-	
-	if (zone != nullptr && nrZone > 0)
-	{
-		this->zone = new Zona[nrZone];
-		for (int i = 0; i < nrZone; i++)
-			this->zone[i] = zone[i];
-	}
-	else
-		this->zone = nullptr;
+	this->zone = zone;
+	nrZone = zone.size();
 }
 
-Eveniment::Eveniment(const Eveniment& e)
-{
-	this->numeEveniment = e.numeEveniment;
-	this->data = e.data;
-	this->ora = e.ora;
-	this->locatie = e.locatie;
+Eveniment::~Eveniment() {}
 
-	if (e.zone != nullptr && e.nrZone > 0)
-	{
-		this->zone = new Zona[e.nrZone];
-		for (int i = 0; i < e.nrZone; i++)
-			this->zone[i] = e.zone[i];
-	}
-	else
-		this->zone = nullptr;
-}
-
-Eveniment::~Eveniment()
-{
-	if (zone != nullptr)
-	{
-		delete[] zone;
-		zone = nullptr;
-	}
-}
+Eveniment::Eveniment(const Eveniment& e) : numeEveniment(e.numeEveniment), data(e.data), ora(e.ora), locatie(e.locatie), zone(e.zone), nrZone(e.nrZone) {}
 
 Eveniment& Eveniment::operator=(const Eveniment& e)
 {
-	this->numeEveniment = e.numeEveniment;
-	this->data = e.data;
-	this->ora = e.ora;
-	this->locatie = e.locatie;
-
-	if (e.zone != nullptr && e.nrZone > 0)
+	if (this != &e)
 	{
-		this->zone = new Zona[e.nrZone];
-		for (int i = 0; i < e.nrZone; i++)
-			this->zone[i] = e.zone[i];
+		numeEveniment = e.numeEveniment;
+		data = e.data;
+		ora = e.ora;
+		locatie = e.locatie;
+		zone = e.zone;
+		nrZone = e.nrZone;
 	}
-	else
-		this->zone = nullptr;
-
 	return *this;
 }
 
@@ -116,88 +73,74 @@ void Eveniment::setLocatie(string locatie)
 	this->locatie = locatie;
 }
 
-const Zona* const& Eveniment::getZone() const
-{
-	return zone;
-}
-
-void Eveniment::setZone(Zona* zone)
-{
-	if (this->zone != nullptr)
-	{
-		delete[] this->zone;
-		this->zone = nullptr;
-	}
-
-	if (zone != nullptr && nrZone > 0)
-	{
-		this->zone = new Zona[nrZone];
-		for (int i = 0; i < nrZone; i++)
-			this->zone[i] = zone[i];
-	}
-	else
-		this->zone = nullptr;
-}
-
 int Eveniment::getNrZone()
 {
 	return nrZone;
 }
 
-void Eveniment::setNrZone(int nrZone)
+vector<Zona> Eveniment::getZone()
 {
-	this->nrZone = nrZone;
+	return zone;
+}
+
+void Eveniment::setZone(vector<Zona> zone)
+{
+	this->zone = zone;
+	nrZone = zone.size();
+}
+
+void Eveniment::addZona(Zona zona)
+{
+	zone.push_back(zona);
+	nrZone++;
 }
 
 Eveniment::operator string()
 {
-	return numeEveniment;
+	string s = "Nume eveniment: " + numeEveniment + "\nData: " + data + "\nOra: " + ora + "\nLocatie: " + locatie + "\nZone: " + "Z";
+	for (int i = 0; i < nrZone; i++)
+	{
+		s += zone[i].getNumeZona() + "\n";
+	}
+	return s;
 }
 
 Zona& Eveniment::operator[](int index)
 {
-	if (index >= 0 && index < nrZone)
-		return zone[index];
-	else
-		throw new exception("Index invalid!");
+	return zone[index];
 }
 
 ostream& operator<<(ostream& out, Eveniment& e)
 {
-	out << "Nume eveniment: " << e.numeEveniment << endl;
-	out << "Data: " << e.data << endl;
-	out << "Ora: " << e.ora << endl;
-	out << "Locatie: " << e.locatie << endl;
-	out << "Numar zone: " << e.nrZone << endl;
-	out << "Zona: " << e.zone << endl;
-
+	out << "Nume eveniment: " << e.numeEveniment << "\nData: " << e.data << "\nOra: " << e.ora << "\nLocatie: " << e.locatie << "\n";
+	for (int i = 0; i < e.nrZone; i++)
+	{
+		out << e.zone[i] << "\n";
+	}
 	return out;
 }
 
 istream& operator>>(istream& in, Eveniment& e)
 {
 	cout << "Nume eveniment: ";
-	in >> e.numeEveniment;
+	getline(in, e.numeEveniment);
+
 	cout << "Data: ";
-	in >> e.data;
+	getline(in, e.data);
+
 	cout << "Ora: ";
-	in >> e.ora;
+	getline(in, e.ora);
+
 	cout << "Locatie: ";
-	in >> e.locatie;
+	getline(in, e.locatie);
+
 	cout << "Numar zone: ";
 	in >> e.nrZone;
-
-	if (e.zone != nullptr)
+	for (int i = 0; i < e.nrZone; i++)
 	{
-		delete[] e.zone;
-		e.zone = nullptr;
-	}
-
-	if (e.nrZone > 0)
-	{
-		e.zone = new Zona[e.nrZone];
-		for (int i = 0; i < e.nrZone; i++)
-			in >> e.zone[i];
+		Zona z;
+		in >> z;
+		e.zone.push_back(z);
 	}
 
 	return in;

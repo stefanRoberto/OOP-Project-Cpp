@@ -18,7 +18,11 @@ public:
     Zona();
     Zona(string numeZona);
     Zona(string numeZona, vector<Loc> locuri);
+    ~Zona();
 
+    Zona(const Zona& z);
+    Zona& operator=(const Zona& z);
+    
     string getNumeZona() const;
     void setNumeZona(string numeZona);
 
