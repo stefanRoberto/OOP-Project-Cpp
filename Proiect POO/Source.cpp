@@ -5,11 +5,14 @@
 #include "Loc.h"
 #include "BiletSpecial.h"
 #include "Aplicatie.h"
-//#include "Aplicatie.h"
 
 using namespace std;
 
 int main() {
+	
+	Aplicatie aplicatie;
+	aplicatie.ruleaza();
+	
 	/*
 	Bilet b1;
 	cout << b1 << endl;
@@ -262,8 +265,6 @@ int main() {
 	//cout << "\n\n\n~~~~~~~~~~~~~BILETUL GENERAT ARATA ASA~~~~~~~~~~~~~\n\n\n";
 	//cout << eveniment;
 
-	Aplicatie aplicatie;
-	aplicatie.ruleaza();
 
 	return 0;
 }
