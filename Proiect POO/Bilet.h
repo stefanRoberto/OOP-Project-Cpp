@@ -7,6 +7,7 @@ using namespace std;
 class Bilet
 {
 	friend class Loc;
+	friend class BiletSpecial;
 private:
 	int id;
 	static int nrBilete; // va fi incrementat la fiecare creare a unui obiect de tip Bilet
@@ -24,15 +25,17 @@ public:
 	int getId() const;
 	static int getNrBilete();
 	static int reducereNrBilete(int nr);
-	double getPret();
+	double getPret() const;
 	void setPret(double pret);
-	string getCategorie();
+	string getCategorie() const;
 	void setCategorie(string categorie);
 	double operator+(Bilet b);
 	bool operator==(Bilet b);
 	bool operator!=(Bilet b);
-	Bilet aplicareReducereProcent(int procent);
+	virtual Bilet aplicareReducereProcent(int procent);
+	virtual void afisareInfoExtra() const;
 	Bilet aplicareReducereLei(double);
+	
 	friend ostream& operator<<(ostream& out, const Bilet& b);
 	friend istream& operator>>(istream& in, Bilet& b);
 };

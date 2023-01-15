@@ -5,33 +5,32 @@
 
 using namespace std;
 
-class Loc
-{
+class Loc {
 	friend class Zona;
 private:
 	int rand;
-	string codificareLoc; // codificareLoc este numarul locului, dar unele locuri pot fi notate cu litere (ex: 1A, 2B, 3C etc),
-	//de aceea este string
+	string codificareLoc;
 	bool ocupat;
-	const Bilet& bilet;
+	Bilet* bilet;
 public:
 	Loc();
-	Loc(int rand, string codificareLoc, const Bilet& bilet);
-	Loc(int rand, string codificareLoc, const Bilet& bilet, bool ocupat);
+	Loc(int rand, string codificareLoc,	Bilet* bilet);
+	Loc(int rand, string codificareLoc, bool ocupat, Bilet* bilet);
 	Loc(const Loc& l);
-	Loc& operator=(const Loc& l);
 	~Loc();
+	Loc& operator=(const Loc& l);
+	bool operator==(const Loc& l) const;
+	
 	int getRand();
 	void setRand(int rand);
 	string getCodificareLoc();
 	void setCodificareLoc(string codificareLoc);
 	bool getOcupat();
 	void setOcupat(bool ocupat);
-	int getIdBilet();
-	bool operator!=(const Loc& l);
-	const Bilet& getBilet() const;
+	Bilet* getBilet();
+	void setBilet(Bilet* bilet);
 
-	friend ostream& operator<<(ostream& out, Loc& l);
 	friend istream& operator>>(istream& in, Loc& l);
+	friend ostream& operator<<(ostream& out, const Loc& l);
 };
 

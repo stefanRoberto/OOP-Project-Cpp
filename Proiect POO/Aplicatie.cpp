@@ -1,11 +1,195 @@
-//#include <iostream>
-//#include <string>
-//#include "Aplicatie.h"
-//#include "Eveniment.cpp"
-//#include "Client.cpp"
-//#include "Bilet.cpp"
-//
-//using namespace std;
+#include "Aplicatie.h"
 
+Aplicatie* Aplicatie::instanta = nullptr;
 
-// <--- Aplicatie.cpp - faza a doua, pentru a face legatura dintre toate celelalte clase, a compune logica --->
+Aplicatie* Aplicatie::getInstanta()
+{
+	if (instanta == nullptr)
+	{
+		instanta = new Aplicatie();
+	}
+	return instanta;
+}
+
+Aplicatie::Aplicatie() {}
+
+Aplicatie::Aplicatie(const Aplicatie& a)
+{
+	evenimente = a.evenimente;
+	bilete = a.bilete;
+}
+
+Aplicatie& Aplicatie::operator=(const Aplicatie& a)
+{
+	if (this != &a)
+	{
+		evenimente = a.evenimente;
+		bilete = a.bilete;
+	}
+	return *this;
+}
+
+Aplicatie::~Aplicatie()
+{
+	evenimente.clear();
+	bilete.clear();
+}
+
+void Aplicatie::ruleaza()
+{
+	afiseazaMeniu();
+}
+
+void Aplicatie::afiseazaMeniu()
+{
+	int optiune;
+	do
+	{
+		cout << "1. Adauga eveniment" << endl;
+		cout << "2. Adauga bilet" << endl;
+		cout << "3. Sterge eveniment" << endl;
+		cout << "4. Sterge bilet" << endl;
+		cout << "5. Afiseaza evenimente" << endl;
+		cout << "6. Afiseaza bilete" << endl;
+		cout << "7. Cauta eveniment" << endl;
+		cout << "8. Valideaza bilet" << endl;
+		cout << "9. Iesire" << endl;
+		cout << "Optiune: ";
+		cin >> optiune;
+		switch (optiune)
+		{
+		case 1:
+			adaugaEveniment();
+			break;
+		case 2:
+			adaugaBilet();
+			break;
+		case 3:
+			stergeEveniment();
+			break;
+		case 4:
+			stergeBilet();
+			break;
+		case 5:
+			afisareEvenimente();
+			break;
+		case 6:
+			afisareBilete();
+			break;
+		case 7:
+			cautaEveniment();
+			break;
+		case 8:
+			valideazaBilet();
+			break;
+		case 9:
+			cout << "La revedere!" << endl;
+			break;
+		default:
+			cout << "Optiune invalida!" << endl;
+			break;
+		}
+	} while (optiune != 9);
+}
+
+void Aplicatie::adaugaBilet()
+{
+	Bilet b;
+	cin >> b;
+	bilete.push_back(b);
+}
+
+void Aplicatie::adaugaEveniment()
+{
+	Eveniment e;
+	cin >> e;
+	evenimente.push_back(e);
+}
+
+void Aplicatie::stergeBilet()
+{
+	int id;
+	cout << "Introduceti id-ul biletului pe care doriti sa il stergeti: ";
+	cin >> id;
+	
+	for (int i = 0; i < bilete.size(); i++)
+	{
+		if (bilete[i].getId() == id)
+		{
+			bilete.erase(bilete.begin() + i);
+			cout << "Biletul a fost sters cu succes!" << endl;
+			return;
+		}
+	}
+	cout << "Nu exista niciun bilet cu acest id!" << endl;
+}
+
+void Aplicatie::stergeEveniment()
+{
+	string numeEveniment;
+	cout << "Introduceti numele evenimentului pe care doriti sa il stergeti: ";
+	cin.ignore();
+	getline(cin, numeEveniment);
+	
+	for (int i = 0; i < evenimente.size(); i++)
+	{
+		if (evenimente[i].getNumeEveniment() == numeEveniment)
+		{
+			evenimente.erase(evenimente.begin() + i);
+			cout << "Evenimentul a fost sters cu succes!" << endl;
+			return;
+		}
+	}
+	cout << "Nu exista niciun eveniment cu acest nume!" << endl;
+}
+
+void Aplicatie::afisareBilete()
+{
+	for (int i = 0; i < bilete.size(); i++)
+	{
+		cout << bilete[i] << endl;
+	}
+}
+
+void Aplicatie::afisareEvenimente()
+{
+	for (int i = 0; i < evenimente.size(); i++)
+	{
+		cout << evenimente[i] << endl;
+	}
+}
+
+void Aplicatie::cautaEveniment() 
+{
+	string numeEveniment;
+	cout << "Introduceti numele evenimentului pe care doriti sa il cautati: ";
+	cin.ignore();
+	getline(cin, numeEveniment);
+
+	for (int i = 0; i < evenimente.size(); i++)
+	{
+		if (evenimente[i].getNumeEveniment() == numeEveniment)
+		{
+			cout << "Evenimentul" << numeEveniment << "a fost gasit!" << endl;
+			return;
+		}
+	}
+	cout << "Nu exista niciun eveniment cu acest nume!" << endl;
+}
+
+void Aplicatie::valideazaBilet() 
+{
+	int id;
+	cout << "Introduceti id-ul biletului pe care doriti sa il validati: ";
+	cin >> id;
+	
+	for (int i = 0; i < bilete.size(); i++)
+	{
+		if (bilete[i].getId() == id)
+		{
+			cout << "Biletul cu id-ul " << id << " este valid!" << endl;
+			return;
+		}
+	}
+	cout << "Nu exista niciun bilet cu acest id!" << endl;
+}

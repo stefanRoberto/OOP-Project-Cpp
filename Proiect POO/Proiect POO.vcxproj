@@ -129,8 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Aplicatie.h" />
     <ClInclude Include="Bilet.h" />
-    <ClInclude Include="BiletVIP.h" />
-    <ClInclude Include="Client.h" />
+    <ClInclude Include="BiletSpecial.h" />
     <ClInclude Include="Eveniment.h" />
     <ClInclude Include="Loc.h" />
     <ClInclude Include="Zona.h" />
@@ -138,8 +137,7 @@
   <ItemGroup>
     <ClCompile Include="Aplicatie.cpp" />
     <ClCompile Include="Bilet.cpp" />
-    <ClCompile Include="BiletVIP.cpp" />
-    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="BiletSpecial.cpp" />
     <ClCompile Include="Eveniment.cpp" />
     <ClCompile Include="Loc.cpp" />
     <ClCompile Include="Source.cpp" />

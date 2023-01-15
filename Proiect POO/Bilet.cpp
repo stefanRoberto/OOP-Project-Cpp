@@ -45,15 +45,21 @@ Bilet::Bilet(const Bilet& b) : id(nrBilete++)
 
 Bilet& Bilet::operator=(const Bilet& b)
 {
-	this->pret = b.pret;
-	this->categorie = b.categorie;
+	if (this != &b)
+	{
+		if (b.pret > 0)
+			this->pret = b.pret;
+		else
+			this->pret = 0.0;
+
+		this->categorie = b.categorie;
+	}
 	return *this;
 }
 
 Bilet::~Bilet() {}
 
-int Bilet::getNrBilete()
-{
+int Bilet::getNrBilete(){
 	return nrBilete;
 }
 
@@ -68,9 +74,11 @@ const{
 	return id;
 }
 
-double Bilet::getPret()
-{
-	return pret;
+double Bilet::getPret() const{
+	if (pret > 0)
+		return pret;
+	else
+		return 0.0;
 }
 
 void Bilet::setPret(double pret)
@@ -79,7 +87,7 @@ void Bilet::setPret(double pret)
 		this->pret = pret;
 }
 
-string Bilet::getCategorie() {
+string Bilet::getCategorie() const{
 	return categorie;
 }
 
@@ -105,12 +113,17 @@ bool Bilet::operator!=(Bilet b)
 
 Bilet Bilet::aplicareReducereProcent(int procent)
 {
-	if (procent > 0 && procent < 100)
+	if (procent > 0 && procent <= 100)
 	{
 		double reducere = (double)procent / 100;
 		this->pret = this->pret - (this->pret * reducere);
 	}
 	return *this;
+}
+
+void Bilet::afisareInfoExtra()
+const{
+	cout << "Nu exista informatii suplimentare pentru acest tip de bilet." << endl;
 }
 
 Bilet Bilet::aplicareReducereLei(double lei)
@@ -132,6 +145,8 @@ ostream& operator<<(ostream& out, const Bilet& b)
 
 	out << "Numarul total de bilete este: " << b.getNrBilete() << endl;
 	out << "ID-ul biletului este: " << b.id << endl;
+	
+	//b.afisareInfoExtra();
 
 	return out;
 }
