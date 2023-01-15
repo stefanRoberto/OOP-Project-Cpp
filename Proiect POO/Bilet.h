@@ -26,13 +26,14 @@ public:
 	static int getNrBilete();
 	static int reducereNrBilete(int nr);
 	double getPret() const;
-	virtual void setPret(double pret);
+	void setPret(double pret);
 	string getCategorie() const;
 	void setCategorie(string categorie);
 	double operator+(Bilet b);
 	bool operator==(Bilet b);
 	bool operator!=(Bilet b);
-	Bilet aplicareReducereProcent(int procent);
+	virtual Bilet aplicareReducereProcent(int procent);
+	virtual void afisareInfoExtra() const;
 	Bilet aplicareReducereLei(double);
 	
 	friend ostream& operator<<(ostream& out, const Bilet& b);

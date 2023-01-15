@@ -33,14 +33,14 @@ BiletSpecial::BiletSpecial(const BiletSpecial& b)
 
 BiletSpecial::~BiletSpecial() {}
 
-void BiletSpecial::setPret(double pret)
+BiletSpecial BiletSpecial::aplicareReducereProcent(double procent)
 {
-	double pretSpecial = 0.0;
-	
-	if (pret >= 0.0)
-		pretSpecial = pret - (5.0 / 100.0) * pret;
-	
-	this->setPret(pretSpecial);
+	if (procent > 0 && procent <= 100)
+	{
+		double reducere = ((double)procent + 5.0) / 100;  //fata de biletul normal, biletul special are reducere de inca 5% bonus 
+		this->pret = this->pret - (this->pret * reducere);
+	}
+	return *this;
 }
 
 bool BiletSpecial::getCateringInclus()
@@ -61,6 +61,12 @@ const{
 void BiletSpecial::setParcareVIP(bool parcareVIP)
 {
 	this->parcareVIP = parcareVIP;
+}
+
+void BiletSpecial::afisareInfoExtra()
+{
+	cout << "Catering inclus: " << (cateringInclus ? "Da" : "Nu") << endl;
+	cout << "Parcare VIP: " << (parcareVIP ? "Da" : "Nu") << endl;
 }
 
 ostream& operator<<(ostream& out, const BiletSpecial& b)

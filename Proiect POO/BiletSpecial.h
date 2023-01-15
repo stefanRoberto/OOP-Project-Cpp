@@ -1,5 +1,8 @@
 #pragma once
+#include <iostream>
+#include <string>
 #include "Bilet.h"
+
 class BiletSpecial : public Bilet
 {
 private:
@@ -11,8 +14,9 @@ public:
 	BiletSpecial(double pret, string categorie, bool cateringInclus, bool parcareVIP);
 	BiletSpecial(const BiletSpecial& b);
 	~BiletSpecial();
-
-	void setPret(double pret);
+	
+	BiletSpecial aplicareReducereProcent(double procent);
+	void afisareInfoExtra();
 	
 	bool getCateringInclus() const;
 	void setCateringInclus(bool cateringInclus);

@@ -113,12 +113,17 @@ bool Bilet::operator!=(Bilet b)
 
 Bilet Bilet::aplicareReducereProcent(int procent)
 {
-	if (procent > 0 && procent < 100)
+	if (procent > 0 && procent <= 100)
 	{
 		double reducere = (double)procent / 100;
 		this->pret = this->pret - (this->pret * reducere);
 	}
 	return *this;
+}
+
+void Bilet::afisareInfoExtra()
+const{
+	cout << "Nu exista informatii suplimentare pentru acest tip de bilet." << endl;
 }
 
 Bilet Bilet::aplicareReducereLei(double lei)
@@ -140,6 +145,8 @@ ostream& operator<<(ostream& out, const Bilet& b)
 
 	out << "Numarul total de bilete este: " << b.getNrBilete() << endl;
 	out << "ID-ul biletului este: " << b.id << endl;
+	
+	//b.afisareInfoExtra();
 
 	return out;
 }
@@ -152,8 +159,7 @@ istream& operator>>(istream& in, Bilet& b)
 		b.pret = 0.0;
 
 	cout << "Introduceti categoria biletului: ";
-	in >> ws;
-	getline(in, b.categorie);
+	in >> b.categorie;
 
 	return in;
 }

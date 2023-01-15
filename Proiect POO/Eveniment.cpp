@@ -123,15 +123,19 @@ ostream& operator<<(ostream& out, Eveniment& e)
 istream& operator>>(istream& in, Eveniment& e)
 {
 	cout << "Nume eveniment: ";
+	in>>ws;
 	getline(in, e.numeEveniment);
 
 	cout << "Data: ";
+	in >> ws;
 	getline(in, e.data);
 
 	cout << "Ora: ";
+	in >> ws;
 	getline(in, e.ora);
 
 	cout << "Locatie: ";
+	in >> ws;
 	getline(in, e.locatie);
 
 	cout << "Numar zone: ";
